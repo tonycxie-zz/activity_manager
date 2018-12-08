@@ -1,0 +1,44 @@
+h1, .header p {
+    display: inline-block;
+}
+
+.header a, .header p {
+    font-size: 20pt;
+    float: right;
+    margin-left: 30px;
+}
+
+.some-table {
+    margin-top: 10px;
+}
+
+.some-table .row {
+    border-left: 2px solid black;
+}
+
+.row .col-display {
+    border-right: 2px solid black;
+}
+
+.row:first-child {
+    background-color: #cccccc;
+    border-top: 2px solid black;
+}
+
+.row:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.row:last-child {
+    border-bottom: 2px solid black;
+}
+
+.col-display p, .col-display a {
+    padding-top: 10px;
+    font-size: 12pt;
+    display: block;
+}
+
+.container .btn {
+    margin-top: 10px;
+}

@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="~/css/show.css">
+
+<div class="container">
+    <div class="header">
+        <h1>Dojo Activity Center</h1>
+        <a href="/dashboard">Home</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+    <h2>@ViewBag.Activity.Title</h2>
+    @if (ViewBag.Activity.UserId == ViewBag.User.UserId)
+    {
+        <a href="/delete/@ViewBag.Activity.ActivityId" class="btn btn-danger">Delete</a>
+    }
+    else 
+    {
+        var attending = false;
+        @foreach (var participant in ViewBag.Participants)
+        {
+            @if (participant.UserId == ViewBag.User.UserId)
+            {
+                attending = true;
+                <a href="/leave/@ViewBag.User.UserId/@ViewBag.Activity.ActivityId" class="btn btn-warning">Leave</a>
+            }
+        }
+        @if (!attending)
+        {
+            <a href="/join/@ViewBag.User.UserId/@ViewBag.Activity.ActivityId" class="btn btn-primary">Join</a>
+        }
+    }
+    <div class="info">
+        <p>Event Coordinator: @ViewBag.Activity.Coordinator.FirstName</p>
+        <p>Description: @ViewBag.Activity.Description</p>
+        <p>Participants:</p>
+        <div class="participants">
+            @foreach (var participant in ViewBag.Participants)
+            {
+                <p>@participant.FirstName</p>
+            }
+        </div>
+    </div>
+</div>

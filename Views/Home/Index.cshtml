@@ -1,0 +1,30 @@
+@model User
+<link rel="stylesheet" href="~/css/main.css" />
+
+<div class="container" id="container-display">
+    <h1>Login and Registration</h1>
+    <div class="registration">
+        <h2>Register here!</h2>
+        <form asp-action="Create" asp-controller="Home" method="post">
+            <span asp-validation-for="FirstName"></span>
+            <label asp-for="FirstName" class="control-label">First Name</label>
+            <input asp-for="FirstName" class="form-control">
+            <span asp-validation-for="LastName"></span>
+            <label asp-for="LastName" class="control-label">Last Name</label>
+            <input asp-for="LastName" class="form-control">
+            <span asp-validation-for="Email"></span>
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Password"></span>
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control">
+            <span asp-validation-for="Confirm"></span>
+            <label asp-for="Confirm" class="control-label">Confirm Password</label>
+            <input asp-for="Confirm" class="form-control">
+            <button type="submit" class="btn btn-success">Register!</button>
+        </form>
+    </div>
+    <div class="login">
+        @Html.Partial("Login")
+    </div>
+</div>

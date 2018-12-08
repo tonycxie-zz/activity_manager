@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="~/css/dashboard.css">
+
+<div class="container">
+    <div class="header">
+        <h1>Dojo Activity Center</h1>
+        <a href="/logout">Logout</a>
+        <p>Welcome @ViewBag.User.FirstName</p>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <span>@ViewBag.Message</span>
+    }
+    <div class="some-table">
+        <div class="row">
+            <div class="col col-display">
+                <p>Activity</p>
+            </div>
+            <div class="col col-display">
+                <p>Date and Time</p>
+            </div>
+            <div class="col col-display">
+                <p>Duration</p>
+            </div>
+            <div class="col col-display">
+                <p>Event Coordinator</p>
+            </div>
+            <div class="col col-display">
+                <p># of Participants</p>
+            </div>
+            <div class="col col-display">
+                <p>Actions</p>
+            </div>
+        </div>
+        @foreach (var activity in ViewBag.Activities)
+        {
+            <div class="row">
+                <div class="col col-display">
+                    <p><a href="/activity/@activity.ActivityId">@activity.Title</a></p>
+                </div>
+                <div class="col col-display">
+                    <p>@activity.Date.ToString("MM/dd/yyyy") - @activity.Time.ToString("hh:mm tt")</p>
+                </div>
+                <div class="col col-display">
+                    <p>@activity.Duration @activity.DurationType</p>
+                </div>
+                <div class="col col-display">
+                    <p>@activity.Coordinator.FirstName</p>
+                </div>
+                <div class="col col-display">
+                    <p>@activity.Participants.Count</p>
+                </div>
+                <div class="col col-display">
+                    @if (activity.UserId == ViewBag.User.UserId)
+                    {
+                        <a href="/delete/@activity.ActivityId">Delete</a>
+                    }
+                    else 
+                    {
+                        var attending = false;
+                        @foreach (var participant in activity.Participants)
+                        {
+                            @if (participant.UserId == ViewBag.User.UserId)
+                            {
+                                attending = true;
+                                <a href="/leave/@ViewBag.User.UserId/@activity.ActivityId">Leave</a>
+                            }
+                        }
+                        @if (!attending)
+                        {
+                            <a href="/join/@ViewBag.User.UserId/@activity.ActivityId">Join</a>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <a href="/new" class="btn btn-success">New</a>
+</div>

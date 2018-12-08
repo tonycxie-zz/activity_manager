@@ -1,0 +1,10 @@
+h1 {
+    display: inline-block;
+}
+
+.header a {
+    font-size: 20pt;
+    text-decoration: underline;
+    float: right;
+    margin-left: 30px;
+}
